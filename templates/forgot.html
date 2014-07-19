@@ -1,0 +1,13 @@
+{% extends 'base.html'%}
+
+{% load crispy_forms_tags %}
+{% block title %}forgot your password?{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Forgot your password?</h1>
+    <div class="container">
+        <div class="form-horizontal">
+            {% crispy forgot_form %}
+        </div>
+    </div>
+{% endblock %}

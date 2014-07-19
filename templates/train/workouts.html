@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Workouts {% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Workouts<br> <small>from the bset trainers</small></h1>
+
+
+    {% comment %}
+    <ul class="row">
+        {% for workout in workouts %}
+            <li class="grid-15">
+                <a href="/workouts/{{ workout.get_url }}">
+                    <h5>{{ workout.name }}</h5>
+                    <h6>Type: {{ workout.type }}</h6>
+                    <h6>Made by: {{ workout.trainer }}</h6>
+                    <p>{{ workout.description }}</p>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endcomment %}
+    <div class="container">
+        {% include 'train/workoutCards.html' %}
+    </div>
+{% endblock %}

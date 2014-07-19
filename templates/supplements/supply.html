@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}{{ supply.name }}{% endblock %}
+
+{% block content %}
+    <h1>{{ supply.name }}</h1>
+    <div class="grid-container">
+        <p>{{ supply.description }}</p>
+        <p>calories: {{ supply.calories }}</p>
+        <p>carbs: {{ supply.carbs }}</p>
+        <p>protein: {{ supply.protein }}</p>
+        <p>fat: {{ supply.fat }}</p>
+        <button class="blueBack addToCart">Add to cart</button>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/pages/supply.js' %}" type="text/javascript"></script>
+{% endblock %}

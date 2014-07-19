@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}Eat{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+
+        <h1 class="text-center">Eat</h1>
+        <hr>
+        <!-- Filter and options -->
+        <div class="row">
+            <div class="col-md-3">
+                <h4>Kind</h4>
+                <button type="button" class="btn btn-primary btn-block">All</button>
+                <button type="button" class="btn btn-primary btn-block">Bulk</button>
+                <button type="button" class="btn btn-primary btn-block">Strength</button>
+                <button type="button" class="btn btn-primary btn-block">Hituv</button>
+            </div>
+            <div class="col-md-3">
+                <h4>Kind</h4>
+                <button type="button" class="btn btn-primary btn-block">All</button>
+                <button type="button" class="btn btn-primary btn-block">Bulk</button>
+                <button type="button" class="btn btn-primary btn-block">Strength</button>
+                <button type="button" class="btn btn-primary btn-block">Hituv</button>
+            </div>
+            <div class="col-md-3" id="sort-by">
+                <h4>Sort by</h4>
+                <button type="button" class="btn btn-success btn-block" value="name">Name</button>
+                <button type="button" class="btn btn-success btn-block" value="prep_time">Prep time</button>
+                <button type="button" class="btn btn-success btn-block" value="difficult_lvl">Difficult level</button>
+                <button type="button" class="btn btn-success btn-block" value="-id">Date uploaded</button>
+            </div>
+            <div class="col-md-3 form-inline" role="search">
+                <h4>Search</h4>
+                <div class="form-group">
+                    <label class="sr-only" for="searchFood">Email address</label>
+                    <input type="search" class="form-control" id="searchFood" placeholder="Search">
+                    <button class="btn btn-success">Search</button>
+                </div>
+            </div>
+        </div>
+
+
+        <hr>
+
+        <!--CARDS -->
+        <div id="cards" role="cards" class="row">
+            {% include 'cards.html' %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+        <script src="{% static 'js/pages/eat.js'%}"></script>
+{% endblock %}

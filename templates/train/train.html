@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Train{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+
+    <!--NAV -->
+        <ul class="nav nav-pills">
+            <li><a href="/workouts">Workouts</a></li>
+            <li><a href="/exercises">Exercises</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="/user_workouts">Your Workouts</a></li>
+                <li><a href="/add_content/exercise">Add Exercise</a></li>
+                <li><a href="/add_content/workout">Add Workout</a></li>
+            {% endif %}
+        </ul>
+
+
+    {% block catContent %}
+        <h1>some cool marketing </h1>
+    {% endblock %}
+    </div>
+{% endblock %}

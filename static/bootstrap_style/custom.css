@@ -1,0 +1,39 @@
+* {
+  font-weight: 300;
+}
+body {
+  padding-top: 70px;
+}
+.clean {
+  color: inherit;
+  text-decoration: none;
+}
+.clean:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.jumbotron {
+  background-color: #ffffff;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: calc(100vh - 70px);
+}
+.text-white {
+  color: #ffffff;
+}
+.circles {
+  display: block;
+  height: 50px;
+  padding: 0;
+}
+.circles .circle {
+  float: left;
+  display: table;
+  height: 50px;
+  width: 50px;
+  text-align: center;
+}
+.circles .circle div {
+  display: table-cell;
+  vertical-align: middle;
+}

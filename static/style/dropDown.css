@@ -1,0 +1,9 @@
+.drop {
+  height: 0;
+  overflow: hidden;
+  border: 1px solid #000000;
+}
+.drop li {
+  float: none;
+  height: 3em;
+}

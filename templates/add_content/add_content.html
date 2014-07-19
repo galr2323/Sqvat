@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}add {% block name %}{% endblock %}{% endblock %}
+{% block content %}
+    <h1>Add a new {% block header %}{% endblock %}</h1>
+
+    <div class="container">
+        {% crispy form %}
+    </div>
+
+
+{% endblock %}
+
+

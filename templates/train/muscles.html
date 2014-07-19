@@ -1,0 +1,9 @@
+<ul class="circles">
+        {% for muscle in item.muscles.all %}
+            <li class="circle bg-primary">
+                <div data-toggle="tooltip" data-placement="bottom" title="{{ muscle.name }}">
+                    <h4>{{ muscle.name|slice:":2"|upper }}</h4>
+                </div>
+            </li>
+        {% endfor %}
+</ul>

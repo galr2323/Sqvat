@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="text-center">{{ workout.name }} <small>by {{ workout.trainer.get_full_name }}</small></h1>
+    <div class="container">
+    {% for day in days %}
+        <h1>Day {{ day.num }}</h1>
+        <ul class="list-group">
+            {% for session in day.sessions.all %}
+                <li class="list-group-item">{{ session.sets }} sets &times; {{ session.reps }} reps of <a href="{{ session.exercise.get_absolute_url }}">{{ session.exercise }}</a>. {{ session.rest }} minutes of rest between sets</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+    </div>
+{% endblock %}
+

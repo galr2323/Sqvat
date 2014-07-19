@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Sign Up {% endblock %}
+
+{% block content %}
+    <div class="container">
+
+
+    {% if signed_up %}
+        <h1>Thank you for signing up</h1>
+        <h2><a>go back to where you left</a></h2>
+    {% else %}
+        <h1 class="text-center">Sign Up</h1>
+
+        <form class="form-horizontal" id="signUpForm" method="post" action="/signUp/" enctype="multipart/form-data">
+            {% crispy user_form %}
+            {% crispy user_profile_form %}
+        </form>
+
+    {% endif %}
+
+</div>
+{% endblock %}
+
+
+  <!--
+        USER NAME
+        <label for="usr">User Name:</label>
+        <br>
+        <input type="text" id="usr" maxlength="30">
+        <br>
+
+        PASSWORD
+        <label for="pwd">Password:</label>
+        <br>
+        <input type="password" id="pwd" maxlength="40">
+        <br>
+
+        EMAIL
+        <label for="email">Email:</label>
+        <br>
+        <input type="email" id="email" maxlength="40">
+        <br>
+
+        <input type="submit" id="sbmt">
+    -->
+

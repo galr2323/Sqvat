@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}execrises {% endblock %}
+
+{% block content %}
+    <h1>Exercises</h1>
+    <div class="container">
+
+            {% include 'train/exercise_cards.html' %}
+
+    </div>
+    {% comment %}
+    <ul class="cards grid-container">
+        {% for exercise in exercises %}
+            <li class="grid-15 suffix-5">
+                <a href="/exercise/{{ exercise.name }}">
+                    <img src="{{ STATIC_URL }}img/hamburger.jpg">
+                    <br>
+                    <h5>{{ exercise.name }}</h5>
+                    <p>{{ exercise.description }}</p>
+
+                    <ul>
+                        {% for muscle in exercise.muscles %}
+                            <li>{{ muscle.name }}</li>
+                        {% endfor %}
+                    </ul>
+
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endcomment %}
+{% endblock %}

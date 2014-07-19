@@ -1,0 +1,6 @@
+{% extends 'cards.html' %}
+{% block img %}{% endblock %}
+{% block info %}
+    <p>type: {{ item.type }}</p>
+    <p>by: {{ item.trainer.get_full_name }}</p>
+{% endblock %}

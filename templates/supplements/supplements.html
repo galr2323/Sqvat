@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}supply{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <ul>
+            {% include 'supplements/supplements_cards.html' %}
+        </ul>
+    </div>
+    {% comment %}
+    <ul class="grid-container cards">
+        {% for supply in supplyments %}
+            <li class="grid-20">
+                <a href="/supply/{{ supply.get_url}}">
+                    <img class="preImg" src="{% static 'img/hamburger.jpg' %}">
+                    <br>
+                    <h6>{{ supply.name }}</h6>
+                    <p>{{ supply.description }}</p>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% endcomment %}
+
+{% endblock %}

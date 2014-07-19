@@ -1,0 +1,15 @@
+{% load staticfiles %}
+
+    {% for item in items %}
+        <div class="col-md-3">
+            <a class="clean" href="{{ item.get_absolute_url }}">
+                <div class="thumbnail">
+                    {% block img %}<img src="{% static 'img/hamburger.jpg' %}" class="" alt="{{ item.name }}">{% endblock%}
+                    <div class="caption">
+                        <h3 class="text-center">{% block name %}{{ item.name}}{% endblock %}</h3>
+                        {% block info %}{% endblock %}
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
