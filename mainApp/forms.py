@@ -3,7 +3,19 @@ from django.contrib.auth.models import User
 from mainApp.models import *
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
-#fix the import to only what needed
+
+def was_sent (request,Form):
+    if request.method == 'POST':
+        form = Form(data=request.POST)
+        if form.is_valid():
+            return True
+        else:
+            print(form.errors)
+            print('form isnt vaild')
+
+
+    return False
+
 
 #USER
 class UserForm(forms.ModelForm):
@@ -22,16 +34,6 @@ class UserForm(forms.ModelForm):
         self.helper.field_class = 'col-md-7'
 
 class UserProfileForm(forms.ModelForm):
-    """
-    img = forms.ImageField()
-    age = forms.CharField(widget=forms.DateInput())
-    GENDER_CHOICE = (
-        ('m','male'),
-        ('f','female')
-    )
-    gender = forms.ChoiceField(widget=forms.RadioSelect, choices = GENDER_CHOICE)
-    """
-
     nickName = forms.CharField(max_length=20)
 
     class Meta:
@@ -105,9 +107,7 @@ class ExerciseForm(forms.ModelForm):
 
 class WorkoutForm(forms.ModelForm):
     name = forms.CharField(max_length=20)
-    #trainer
     description = forms.Textarea()
-    #exercise
 
     class Meta:
         model = Workout
@@ -128,9 +128,9 @@ class WorkoutForm(forms.ModelForm):
 class FoodForm(forms.ModelForm):
     name = forms.CharField(max_length=40)
     description = forms.Textarea()
-    #img field needed ------------
     ingredients = forms.ModelMultipleChoiceField(Ingredient.objects.order_by('name'))
 
+    #nutrition
     calories = forms.IntegerField()
     carbs = forms.IntegerField()
     protein = forms.IntegerField()
@@ -138,7 +138,6 @@ class FoodForm(forms.ModelForm):
 
     prep_time = forms.IntegerField()
     difficult_lvl = forms.ChoiceField(choices=Food.LVL_CHOICES)
-
 
     class Meta:
         model = Food
@@ -155,11 +154,6 @@ class FoodForm(forms.ModelForm):
 
         self.helper.add_input(Submit('submit', 'Submit'))
 
-#SUPPLY
-
-#STORE
-
-#class ReviewForm(forms.ModelForm):
 
 class FoodReviewForm(forms.ModelForm):
 
