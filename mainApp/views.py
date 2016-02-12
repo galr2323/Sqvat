@@ -50,13 +50,6 @@ def workout (request, workout_url):
 
     days = WorkDay.objects.filter(workout=workout_obj)
 
-
-    #try:
-        #reviews = WorkoutReview.objects.filter(workout=workout_obj)
-    """except WorkoutReview.DoesNotExist:
-        print('reviews for the food doesnt exits')
-        reviews = ''"""
-
     return render(request, 'train/workout.html',{'workout':workout_obj,'days':days})
 
 def user_workouts(request):
@@ -81,7 +74,7 @@ def eat(request):
     items = Food.objects.order_by('name')
     return render(request,'eat/eat.html',{'items':items})
 
-def food (request,food_url) :
+def food(request,food_url) :
     food_name = food_url.replace('_',' ')
     try:
         food_obj = Food.objects.get(name=food_name)
@@ -92,44 +85,29 @@ def food (request,food_url) :
     ingredients = Ingredient.objects.filter(food=food_obj)
     reviews = FoodReview.objects.filter(food=food_obj).order_by('-time')
 
-
     return render(request, 'eat/food.html',{'food':food_obj,'reviews':reviews, 'ingredients':ingredients})
 
 
 #SIGNING
 def signUp(request) :
-
     signed_up = False
 
-    # If it's a HTTP POST, we're interested in processing form data.
+    # If it's a HTTP POST -> a from was sent.
     if request.method == 'POST':
         # Attempt to grab information from the raw form information.
-        # Note that we make use of both UserForm and UserProfileForm.
         user_form = UserForm(data=request.POST)
         user_profile_form = UserProfileForm(data=request.POST)
 
-        # If the two forms are valid...
         if user_form.is_valid() and user_profile_form.is_valid():
             # Save the user's form data to the database.
             user = user_form.save()
-
-            # Now we hash the password with the set_password method.
-            # Once hashed, we can update the user object.
             user.set_password(user.password)
             user.save()
-
-            # Now sort out the UserProfile instance.
-            # Since we need to set the user attribute ourselves, we set commit=False.
-            # This delays saving the model until we're ready to avoid integrity problems.
             profile = user_profile_form.save(commit=False)
             profile.user = user
-
-            # Did the user provide a profile picture?
-            # If so, we need to get it from the input form and put it in the UserProfile model.
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
 
-            # Now we save the UserProfile model instance.
             profile.save()
 
             # Update our variable to tell the template registration was successful.
