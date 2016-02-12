@@ -3,17 +3,14 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model) :
     user = models.OneToOneField(User)
-
-    age = models.DateField()
+    birth_date = models.DateField()
 
     GENDER_CHOICES = (
         ('m','Male'),
         ('f','Female')
     )
     gender = models.CharField(max_length=2, choices=GENDER_CHOICES)
-    """
-    img = models.ImageField(upload_to='user_profile_imgs',blank=True)
-    """
+
     def __str__(self):
         return self.user.username
 
@@ -24,12 +21,10 @@ class UserProfile(models.Model) :
 class Trainer (models.Model):
     #importing from user
     user = models.OneToOneField(UserProfile)
-
     #personal info
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     img = models.ImageField(upload_to='trainer_profile_imgs/')
-
     graduation = models.TextField()
 
     def __str__(self):
@@ -39,28 +34,27 @@ class Trainer (models.Model):
         return 'user' + self.user.user.username
 
     def get_full_name(self):
-        """returns the full trainers name"""
+        """returns the trainer's full name"""
         return self.first_name + ' ' + self.last_name
 
 
 class Muscle (models.Model):
     name = models.CharField(max_length=40,unique=True)
-
-    class Meta:
-        ordering = ['name']
-
+    
     def __str__(self):
         return self.name
 
 
+    class Meta:
+        ordering = ['name']
+
+
 class Exercise (models.Model):
     name = models.CharField(max_length=40,unique=True)
-
     description = models.TextField()
-
+    muscles = models.ManyToManyField(Muscle)
     #img = models.ImageField(upload_to='exercise_imgs')
     #video = models.FileField()
-    muscles = models.ManyToManyField(Muscle)
 
     def __str__(self):
         return self.name
@@ -79,15 +73,14 @@ class WorkSession(models.Model):
 
 class Workout (models.Model):
     name = models.CharField(max_length=40,unique=True)
-
     trainer = models.ForeignKey(Trainer)
 
     TYPE_CHOICES = (
         ('general','General'),
-        ('mass','Mass'),
-        ('toning','Toning')
+        ('bulk','Bulk'),
+        ('cut','Cut')
     )
-    type = models.CharField(max_length=8, choices=TYPE_CHOICES)
+    workout_type = models.CharField(max_length=8, choices=TYPE_CHOICES)
     description = models.TextField()
 
     def __str__(self):
@@ -107,7 +100,6 @@ class WorkDay(models.Model):
 
 
 class Ingredient (models.Model):
-    #food = models.ForeignKey(Food)
     name = models.CharField(max_length=40, unique=True)
     img = models.ImageField(upload_to='ingredient_imgs')
 
@@ -120,14 +112,14 @@ class Food (models.Model):
     description = models.TextField()
     #img = models.ImageField(upload_to='food_img')
     ingredients = models.ManyToManyField(Ingredient)
-
+    
     #nurtion in 100 grams
     calories = models.IntegerField()
     carbs = models.IntegerField()
     protein = models.IntegerField()
     fat = models.IntegerField()
 
-    prep_time = models.IntegerField() #minutes
+    prep_time = models.IntegerField() #in minutes
 
     LVL_CHOICES = (
         ('1','Child'),
@@ -165,8 +157,7 @@ class SupplyType(models.Model):
 class Supply(models.Model):
     name = models.CharField(max_length=40,unique=True)
 
-
-    type = models.ForeignKey(SupplyType)
+    supply_type = models.ForeignKey(SupplyType)
     brand = models.ForeignKey(Brand)
     description = models.TextField()
 
