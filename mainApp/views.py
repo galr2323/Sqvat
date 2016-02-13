@@ -17,6 +17,7 @@ import json
 def index(request) :
     return render(request,'home.html',{'sign_in_form':SignInForm})
 
+
 #TRAIN
 def train(request) :
     return render(request, 'train/train.html')
@@ -34,7 +35,6 @@ def exercise(request,exercise_url):
         return HttpResponseRedirect('/')
 
     return render(request, 'train/exercise.html',{'exercise':exercise_obj})
-
 
 def workouts(request):
     items = Workout.objects.order_by('name')
@@ -88,7 +88,7 @@ def food(request,food_url) :
     return render(request, 'eat/food.html',{'food':food_obj,'reviews':reviews, 'ingredients':ingredients})
 
 
-#SIGNING
+#USERS SYSTEM
 def signUp(request) :
     signed_up = False
 
@@ -109,19 +109,13 @@ def signUp(request) :
                 profile.picture = request.FILES['picture']
 
             profile.save()
-
-            # Update our variable to tell the template registration was successful.
             signed_up = True
 
-        # Invalid form or forms - mistakes or something else?
-        # Print problems to the terminal.
-        # They'll also be shown to the user.
+        # Invalid form
         else:
             print(user_form.errors, user_profile_form.errors)
             print('not signed up')
 
-    # Not a HTTP POST, so we render our form using two ModelForm instances.
-    # These forms will be blank, ready for user input.
     else:
         user_form = UserForm()
         user_profile_form = UserProfileForm()
@@ -259,8 +253,6 @@ def save_content(request):
     print('form with errors:   ' + form_html)
     return HttpResponse(json.dumps({'saved':False,'form':form_html}), content_type="application/json")
 
-
-
 def get_list(request):
     model = request.GET['model']
     print(model)
@@ -359,8 +351,7 @@ class AddFood(CreateView):
     form_class = FoodForm
     template_name = 'add_content/add_food.html'
 
+
 class AddExercise(CreateView):
     form_class = ExerciseForm
     template_name = 'add_content/add_exercise.html'
-
-
